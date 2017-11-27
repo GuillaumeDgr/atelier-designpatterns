@@ -21,6 +21,9 @@ public class MainActivity extends AppCompatActivity implements Observer {
         setContentView(R.layout.activity_main);
 
         // TODO : init singleton then load news
+        NewsSingleton newsSingleton = NewsSingleton.getInstance();
+        newsSingleton.addObserver(this);
+        newsSingleton.loadNews();
 
         // setup the adapter
         RecyclerView newsListView = findViewById(R.id.news_list);
@@ -30,9 +33,13 @@ public class MainActivity extends AppCompatActivity implements Observer {
             @Override
             public void onClick(NewsModel newsModel) {
                 // TODO : call NewsActivity
+                Intent intent = new Intent(MainActivity.this, NewsActivity.class);
+                intent.putExtra("news", newsModel);
+                startActivity(intent);
             }
         });
         newsListView.setAdapter(mAdapter);
+        newsListView.swapAdapter(mAdapter, false);
 
         Button addNews = findViewById(R.id.add_news);
         addNews.setOnClickListener(new View.OnClickListener() {
