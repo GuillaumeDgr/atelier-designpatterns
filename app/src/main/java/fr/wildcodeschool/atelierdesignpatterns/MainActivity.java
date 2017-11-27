@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements Observer {
                 startActivity(intent);
             }
         });
-        newsListView.setAdapter(mAdapter);
         newsListView.swapAdapter(mAdapter, false);
 
         Button addNews = findViewById(R.id.add_news);
